@@ -50,13 +50,21 @@ public class Dungeon
 
 		Hero theHero;
 		Monster theMonster;
+		theHero = chooseHero();
+		int monstersKilled = 0;
 
 		do
 		{
-		    theHero = chooseHero();
-		    theMonster = generateMonster();
+			//once you kill 3 monsters you fight the dragon boss
+			if(monstersKilled < 3)
+				theMonster = generateMonster();
+			else {
+				System.out.println("you sense great danger ahead...");
+				theMonster = new Dragon();
+			}
 			battle(theHero, theMonster);
-
+			monstersKilled++;
+			System.out.println("Monsters killed: " + monstersKilled);
 		} while (playAgain());
 
     }//end main method

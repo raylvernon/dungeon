@@ -18,7 +18,7 @@ public class Warrior extends Hero
     public Warrior()
 	{
 
-		super("Warrior", 125, 4, .8, 35, 60, .2);
+		super("Warrior", 250, 4, .8, 35, 60, .2);
 
 
     }//end constructor
