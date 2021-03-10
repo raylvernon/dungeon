@@ -1,0 +1,10 @@
+//similar to the Sorceress but heals more
+
+
+
+public class Cleric extends Hero {
+  //public final int MIN_ADD = 24;
+  //public final int MAX_ADD = 49;
+
+
+}
