@@ -3,8 +3,23 @@
 
 
 public class Cleric extends Hero {
-  //public final int MIN_ADD = 24;
-  //public final int MAX_ADD = 49;
+  //public final int MIN_ADD = 20;
+  //public final int MAX_ADD = 40;
+
+  public Cleric(){
+    super("Cleric", 65, 5, .5, 24, 49, .2);
+  }
+
+  public void increaseHeal(){
+    int hP;
+
+    hP = (int)(Math.random() * (MAX_ADD - MIN_ADD + 2)) + MIN_ADD;
+    addHP(hP);
+
+    System.out.println(name + "healed [" + hP + "] points. \n"
+                        + "Total hit points remaining are: " + hP);
+    System.out.println();
+  }
 
 
 }
