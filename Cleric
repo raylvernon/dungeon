@@ -7,7 +7,7 @@ public class Cleric extends Hero {
   //public final int MAX_ADD = 70;
 
   public Cleric(){
-    super("Cleric", 70, 5, .5, 24, 49, .2);
+    super("Cleric", 70, 5, .5, 24, 49, .3);
   }
 
   public void increaseHeal(){
@@ -29,29 +29,30 @@ public class Cleric extends Hero {
   }
 
   public void battleChoices(DungeonCharacter opponent){
-  super.battleChoices(opponent);
-  int choice;
+    super.battleChoices(opponent);
+    int choice;
 
-  do
-  {
-      System.out.println("1. Attack Opponent");
-      System.out.println("2. Heal Unit");
-      System.out.print("Choose an option: ");
-      choice = Keyboard.readInt();
+    do
+    {
+        System.out.println("1. Attack Opponent");
+        System.out.println("2. Heal Unit");
+        //System.out.println("3. ")
+        System.out.print("Choose an option: ");
+        choice = Keyboard.readInt();
 
-      switch (choice)
-      {
-        case 1: attack(opponent);
-            break;
-        case 2: increaseHeal();
-            break;
-        default:
-            System.out.println("invalid choice!");
-      }//end switch
+        switch (choice)
+        {
+          case 1: attack(opponent);
+              break;
+          case 2: increaseHeal();
+              break;
+          default:
+              System.out.println("invalid choice!");
+        }//end switch
 
-    numTurns--;
-      if (numTurns > 0)
-        System.out.println("Number of turns remaining is: " + numTurns);
+      numTurns--;
+        if (numTurns > 0)
+          System.out.println("Number of turns remaining is: " + numTurns);
   }while(numTurns > 0 && hitPoint > 0 && opponent.getHitPoints() > 0);
 
 }
