@@ -1,66 +1,21 @@
-/**
- * Title: Dungeon.java
- *
- * Description: Driver file for Heroes and Monsters project
- *
- * Copyright:    Copyright (c) 2001
- * Company: Code Dogs Inc.
- * I.M. Knurdy
- *
- * History:
- *  11/4/2001: Wrote program
- *    --created DungeonCharacter class
- *    --created Hero class
- *    --created Monster class
- *    --had Hero battle Monster
- *    --fixed attack quirks (dead monster can no longer attack)
- *    --made Hero and Monster abstract
- *    --created Warrior
- *    --created Ogre
- *    --made Warrior and Ogre battle
- *    --added battleChoices to Hero
- *    --added special skill to Warrior
- *    --made Warrior and Ogre battle
- *    --created Sorceress
- *    --created Thief
- *    --created Skeleton
- *    --created Gremlin
- *    --added game play features to Dungeon.java (this file)
- *  11/27/2001: Finished documenting program
- * version 1.0
- */
-
-
-
-/*
-  This class is the driver file for the Heroes and Monsters project.  It will
-  do the following:
-
-  1.  Allow the user to choose a hero
-  2.  Randomly select a monster
-  3.  Allow the hero to battle the monster
-
-  Once a battle concludes, the user has the option of repeating the above
-
-*/
 public class Dungeon
 {
     public static void main(String[] args)
 	{
 
-		Hero theHero;
-		Monster theMonster;
+		DungeonCharacter theHero;
+		DungeonCharacter theMonster;
 		theHero = chooseHero();
 		int monstersKilled = 0;
 
 		do
 		{
-			//once you kill 3 monsters you fight the dragon boss
+			//once you kill 3 DungeonCharacters you fight the dragon boss
 			if(monstersKilled < 3)
 				theMonster = generateMonster();
 			else {
 				System.out.println("you sense great danger ahead...");
-				theMonster = new Dragon();
+				theMonster = DungeonCharacter.Dragon();
 			}
 			battle(theHero, theMonster);
 			monstersKilled++;
@@ -70,36 +25,36 @@ public class Dungeon
     }//end main method
 
 /*-------------------------------------------------------------------
-chooseHero allows the user to select a hero, creates that hero, and
+chooseHero allows the user to select a DungeonCharacter, creates that DungeonCharacter, and
 returns it.  It utilizes a polymorphic reference (Hero) to accomplish
 this task
 ---------------------------------------------------------------------*/
-	public static Hero chooseHero()
+	public static DungeonCharacter chooseHero()
 	{
 		int choice;
-		Hero theHero;
+		DungeonCharacter theHero;
 
-		Hero heroes[] = {new Warrior(), new Sorceress(), new Thief()};
+		DungeonCharacter Heroes[] = {DungeonCharacter.Warrior(""), DungeonCharacter.Sorceress(""), DungeonCharacter.Thief("")};
 		
-		System.out.println("Choose a hero:\n");
-		for(int i = 0; i < heroes.length; i ++)
-			System.out.println(i + ". " + heroes[i].getName());
+		System.out.println("Choose a DungeonCharacter:\n");
+		for(int i = 0; i < Heroes.length; i ++)
+			System.out.println(i + ". " + Heroes[i].getName());
 
 		choice = Keyboard.readInt();
-		return heroes[choice % heroes.length];
+		return Heroes[choice % Heroes.length];
 	}//end chooseHero method
 
 /*-------------------------------------------------------------------
-generateMonster randomly selects a Monster and returns it.  It utilizes
+generateMonster randomly selects a DungeonCharacter and returns it.  It utilizes
 a polymorphic reference (Monster) to accomplish this task.
 ---------------------------------------------------------------------*/
-	public static Monster generateMonster()
+	public static DungeonCharacter generateMonster()
 	{
-		Monster monsters[] = {new Ogre(), new Gremlin(), new Skeleton()};
+		DungeonCharacter Monsters[] = {DungeonCharacter.Ogre(), DungeonCharacter.Gremlin(), DungeonCharacter.Skeleton()};
 
 		int rnd = (int)(Math.random() * 100);
 		
-		return monsters[rnd % monsters.length];
+		return Monsters[rnd % Monsters.length];
 	}//end generateMonster method
 
 /*-------------------------------------------------------------------
@@ -119,7 +74,7 @@ true if the user chooses to continue, false otherwise.
 	
 	
 /*-----------------------------------------------
-turns for heroes and monsters 
+turns for DungeonCharacteres and DungeonCharacters 
 -------------------------------------------------*/
 public static void takeTurn(DungeonCharacter active, DungeonCharacter target, boolean playerChooses)
 {
@@ -134,20 +89,22 @@ public static void takeTurn(DungeonCharacter active, DungeonCharacter target, bo
 
 		active.act(Keyboard.readInt(), target);		
 	}
-	else // monster has to figure out what the best thing to do is
+	else // DungeonCharacter has to figure out what the best thing to do is
 	{
+		// weighted probability for moves?
+		// HP < N -> heal instead of attack?
 		// choose randomly from available moves
 		active.act((int)(Math.random()*100) % active.getActions().size(), target);
 	}
 }
 	
 /*-------------------------------------------------------------------
-battle is the actual combat portion of the game.  It requires a Hero
-and a Monster to be passed in.  Battle occurs in rounds.  The Hero
-goes first, then the Monster.  At the conclusion of each round, the
+battle is the actual combat portion of the game.  It requires a DungeonCharacter
+and a DungeonCharacter to be passed in.  Battle occurs in rounds.  The DungeonCharacter
+goes first, then the DungeonCharacter.  At the conclusion of each round, the
 user has the option of quitting.
 ---------------------------------------------------------------------*/
-	public static void battle(Hero theHero, Monster theMonster)
+	public static void battle(DungeonCharacter theHero, DungeonCharacter theMonster)
 	{
 		char pause = 'p';
 		System.out.println(theHero.getName() + " vs. " +
@@ -165,13 +122,13 @@ user has the option of quitting.
 			
 			if(heroTimer <= 0)
 			{
-				// hero takes turn
+				// DungeonCharacter takes turn
 				takeTurn((DungeonCharacter)theHero, (DungeonCharacter)theMonster, true);
 				heroTimer = 100;
 			}
 			if(monsterTimer <= 0)
 			{
-				// monster takes turn
+				// DungeonCharacter takes turn
 				takeTurn((DungeonCharacter)theMonster, (DungeonCharacter)theHero, false);
 				monsterTimer = 100;
 			}

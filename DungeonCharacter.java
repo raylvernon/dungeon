@@ -5,14 +5,68 @@ import java.util.ArrayList;
 
 
 
-public abstract class DungeonCharacter implements Comparable
+public class DungeonCharacter implements Comparable
 {
+	public static DungeonCharacter Warrior(String name)
+	{
+		DungeonCharacter rv = new DungeonCharacter(name + "the Warrior", 250, 4, .8);
+		rv.addAction(new CuttingWeapon("Zweihander", 100)); // Barbarian bro goes WHACK
+		rv.addAction(new HealingItem("Nordic Ale", 75, 3));
+		return rv;
+	}//end constructor
+
+	public static DungeonCharacter Thief(String name)
+	{
+		DungeonCharacter rv = new DungeonCharacter(name + "the Thief", 150, 6, .8);
+		rv.addAction(new CuttingWeapon("Crooked Dagger", 50));
+		return rv;
+	}//end constructor
+	
+	public static DungeonCharacter Sorceress(String name)
+	{
+		DungeonCharacter rv = new DungeonCharacter(name + "the Sorceress", 150, 5, .7);
+		rv.addAction(new RangedWeapon("Fireball", 100));
+		rv.addAction(new HealingSpell("heal", 50));
+		return rv;
+	}//end constructor
+	
+    public static DungeonCharacter Ogre()
+	{
+		DungeonCharacter rv = new DungeonCharacter("Oscar the Ogre", 200, 2, .6);
+		rv.addAction(new CrushingWeapon("Gnarled Oak Club", 80));
+		rv.addAction(new HealingItem("Stinky Mead", 100, 1));
+		return rv;
+    }//end constructo
+	
+	public static DungeonCharacter Skeleton()
+	{
+		DungeonCharacter rv = new DungeonCharacter("Sargath the Skeleton", 100, 3, .8);
+		rv.addAction(new RangedWeapon("Femur-braced bow", 60));
+		return rv;
+    }//end constructor
+	
+	public static DungeonCharacter Gremlin()
+	{
+		DungeonCharacter rv = new DungeonCharacter("Gnarltooth the Gremlin", 70, 5, .8);
+		rv.addAction(new CuttingWeapon("Rusty Knife", 40));
+		rv.addAction(new RangedWeapon("Blow darts", 20));
+		return rv;
+    }//end constructor
+
+	public static DungeonCharacter Dragon() {
+		DungeonCharacter rv = new DungeonCharacter("Drex the Dragon", 150, 3, .8);
+		rv.addAction(new BreathAttack("Searing Flames", 100));
+		rv.addAction(new CuttingWeapon("Talons", 80));
+		rv.addAction(new CrushingWeapon("Thorny Tail", 80));
+		return rv;
+	}
 
 	protected String name;
 	protected int hitPoints;
 	protected int attackSpeed;
 	protected double chanceToHit;
 
+	// important behavior is in actions!
 	ArrayList<Action> actions;
 	
 	public void addAction(Action a)
@@ -41,7 +95,7 @@ public abstract class DungeonCharacter implements Comparable
 //-----------------------------------------------------------------
 //explicit constructor to initialize instance variables -- it is called
 // by derived classes
-	public DungeonCharacter(String name, int hitPoints, int attackSpeed,
+	private DungeonCharacter(String name, int hitPoints, int attackSpeed,
 				     double chanceToHit)
 	{
 		this.actions = new ArrayList<Action>();
@@ -150,30 +204,6 @@ This method is called by: unknown (intended for external use)
 			actions.get(actionChoice % actions.size()).perform(this, target);
 		else
 			System.out.println(" but " + name + " doesn't know how to do anything!");
-		// complications such as chanceToHit will have to be reintroduced...
-		// boolean canAttack;
-		// int damage;
-
-		// canAttack = Math.random() <= chanceToHit;
-
-		// if (canAttack)
-		// {
-			// damage = (int)(Math.random() * (damageMax - damageMin + 1))
-						// + damageMin ;
-			// opponent.subtractHitPoints(damage);
-
-
-
-			// System.out.println();
-		// }//end if can attack
-		// else
-		// {
-
-			// System.out.println(getName() + "'s attack on " + opponent.getName() +
-								// " failed!");
-			// System.out.println();
-		// }//end else
-
 	}//end attack method
 
 //-----------------------------------------------------------------
