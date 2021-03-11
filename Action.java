@@ -4,10 +4,11 @@ public class Action
 	{
 		name = n;
 	}
+
 	
     public void perform(DungeonCharacter me, DungeonCharacter target)
 	{
-		System.out.println(me.getName() + " points his finger accusingly at " + target.getName());
+		System.out.println(me.getName() + " waves their hand vaguely at " + target.getName() + ". are they casting a spell?");
 	}
 
 	protected String name;

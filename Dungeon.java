@@ -79,23 +79,14 @@ this task
 		int choice;
 		Hero theHero;
 
-		System.out.println("Choose a hero:\n" +
-					       "1. Warrior\n" +
-						   "2. Sorceress\n" +
-						   "3. Thief");
+		Hero heroes[] = {new Warrior(), new Sorceress(), new Thief()};
+		
+		System.out.println("Choose a hero:\n");
+		for(int i = 0; i < heroes.length; i ++)
+			System.out.println(i + ". " + heroes[i].getName());
+
 		choice = Keyboard.readInt();
-
-		switch(choice)
-		{
-			case 1: return new Warrior();
-
-			case 2: return new Sorceress();
-
-			case 3: return new Thief();
-
-			default: System.out.println("invalid choice, returning Thief");
-				     return new Thief();
-		}//end switch
+		return heroes[choice % heroes.length];
 	}//end chooseHero method
 
 /*-------------------------------------------------------------------
@@ -104,21 +95,9 @@ a polymorphic reference (Monster) to accomplish this task.
 ---------------------------------------------------------------------*/
 	public static Monster generateMonster()
 	{
-		int choice;
+		Monster monsters[] = {new Ogre(), new Gremlin(), new Skeleton()};
 
-		choice = (int)(Math.random() * 3) + 1;
-
-		switch(choice)
-		{
-			case 1: return new Ogre();
-
-			case 2: return new Gremlin();
-
-			case 3: return new Skeleton();
-
-			default: System.out.println("invalid choice, returning Skeleton");
-				     return new Skeleton();
-		}//end switch
+		return monsters[(int)Math.random() % monsters.length];
 	}//end generateMonster method
 
 /*-------------------------------------------------------------------
@@ -136,6 +115,7 @@ true if the user chooses to continue, false otherwise.
 	}//end playAgain method
 
 
+	
 /*-------------------------------------------------------------------
 battle is the actual combat portion of the game.  It requires a Hero
 and a Monster to be passed in.  Battle occurs in rounds.  The Hero
@@ -152,12 +132,11 @@ user has the option of quitting.
 		//do battle
 		while (theHero.isAlive() && theMonster.isAlive() && pause != 'q')
 		{
-		    //hero goes first
-			theHero.battleChoices(theMonster);
+		    for(int i = 0; i < theHero.getActions().size(); i ++)
+				System.out.println(i + ". " + theHero.getActions().get(i).getName());
 
-			//monster's turn (provided it's still alive!)
-			if (theMonster.isAlive())
-			    theMonster.attack(theHero);
+			theHero.act(Keyboard.readInt(), theMonster);
+			theMonster.act((int)Math.random() % theMonster.getActions().size(), theHero);
 
 			//let the player bail out if desired
 			System.out.print("\n-->q to quit, anything else to continue: ");
