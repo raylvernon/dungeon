@@ -74,7 +74,8 @@ this task
 		System.out.println("Choose a hero:\n" +
 					       "1. Warrior\n" +
 						   "2. Sorceress\n" +
-						   "3. Thief");
+						   "3. Thief" +
+               "4. Cleric");
 		choice = Keyboard.readInt();
 
 		switch(choice)
@@ -85,6 +86,8 @@ this task
 
 			case 3: return new Thief();
 
+      case 4: return new Cleric();
+      
 			default: System.out.println("invalid choice, returning Thief");
 				     return new Thief();
 		}//end switch
