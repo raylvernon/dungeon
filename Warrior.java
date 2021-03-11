@@ -20,7 +20,7 @@ public class Warrior extends Hero
 
 		super("Warrior", 250, 4, .8);
 		addAction(new CuttingWeapon("Zweihander", 100)); // Barbarian bro goes WHACK
-
+		addAction(new HealingItem("Nordic Ale", 75, 3));
     }//end constructor
 
 

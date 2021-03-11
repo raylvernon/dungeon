@@ -20,6 +20,14 @@ public abstract class DungeonCharacter implements Comparable
 		actions.add(a);
 	}
 	
+	public void removeAction(Action a)
+	{
+		// don't want to have an empty list of actions
+		// this is intentionally exploitable by the player :)
+		if(actions.size() > 1)
+			actions.remove(a);
+	}
+	
 	public ArrayList<Action> getActions()
 	{
 		return actions;

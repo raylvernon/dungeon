@@ -97,7 +97,9 @@ a polymorphic reference (Monster) to accomplish this task.
 	{
 		Monster monsters[] = {new Ogre(), new Gremlin(), new Skeleton()};
 
-		return monsters[(int)Math.random() % monsters.length];
+		int rnd = (int)(Math.random() * 100);
+		
+		return monsters[rnd % monsters.length];
 	}//end generateMonster method
 
 /*-------------------------------------------------------------------
@@ -114,7 +116,30 @@ true if the user chooses to continue, false otherwise.
 		return (again == 'Y' || again == 'y');
 	}//end playAgain method
 
+	
+	
+/*-----------------------------------------------
+turns for heroes and monsters 
+-------------------------------------------------*/
+public static void takeTurn(DungeonCharacter active, DungeonCharacter target, boolean playerChooses)
+{
+	System.out.println(active.getName() + " is ready: ");
+	
+	// if the player is making the choice
+	if(playerChooses)
+	{
+		// show available options
+		for(int i = 0; i < active.getActions().size(); i ++)
+			System.out.println(i + ". " + active.getActions().get(i).getName());
 
+		active.act(Keyboard.readInt(), target);		
+	}
+	else // monster has to figure out what the best thing to do is
+	{
+		// choose randomly from available moves
+		active.act((int)(Math.random()*100) % active.getActions().size(), target);
+	}
+}
 	
 /*-------------------------------------------------------------------
 battle is the actual combat portion of the game.  It requires a Hero
@@ -125,25 +150,34 @@ user has the option of quitting.
 	public static void battle(Hero theHero, Monster theMonster)
 	{
 		char pause = 'p';
-		System.out.println(theHero.getName() + " battles " +
+		System.out.println(theHero.getName() + " vs. " +
 							theMonster.getName());
 		System.out.println("---------------------------------------------");
 
+		int heroTimer    = 100;
+		int monsterTimer = 100;
+		
 		//do battle
 		while (theHero.isAlive() && theMonster.isAlive() && pause != 'q')
 		{
-		    for(int i = 0; i < theHero.getActions().size(); i ++)
-				System.out.println(i + ". " + theHero.getActions().get(i).getName());
-
-			theHero.act(Keyboard.readInt(), theMonster);
-			theMonster.act((int)Math.random() % theMonster.getActions().size(), theHero);
-
-			//let the player bail out if desired
-			System.out.print("\n-->q to quit, anything else to continue: ");
-			pause = Keyboard.readChar();
-
+			heroTimer -= theHero.getAttackSpeed();
+			monsterTimer -= theMonster.getAttackSpeed();
+			
+			if(heroTimer <= 0)
+			{
+				// hero takes turn
+				takeTurn((DungeonCharacter)theHero, (DungeonCharacter)theMonster, true);
+				heroTimer = 100;
+			}
+			if(monsterTimer <= 0)
+			{
+				// monster takes turn
+				takeTurn((DungeonCharacter)theMonster, (DungeonCharacter)theHero, false);
+				monsterTimer = 100;
+			}
 		}//end battle loop
 
+		
 		if (!theMonster.isAlive())
 		    System.out.println(theHero.getName() + " was victorious!");
 		else if (!theHero.isAlive())

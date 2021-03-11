@@ -16,5 +16,6 @@ public class Gremlin extends Monster
 	{
 		super("Gnarltooth the Gremlin", 70, 5, .8);
 		addAction(new CuttingWeapon("Rusty Knife", 40));
+		addAction(new RangedWeapon("Blow darts", 20));
     }//end constructor
 }//end class Gremlin
