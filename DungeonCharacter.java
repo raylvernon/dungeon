@@ -156,8 +156,7 @@ This method is called by: heal method of monsters and Sorceress
 		else
 		{
 			this.hitPoints += hitPoints;
-			//System.out.println("Remaining Hit Points: " + hitPoints);
-
+			UI.printHP(this.hitPoints, hitPoints);
 		}
 	}//end addHitPoints method
 
@@ -182,17 +181,9 @@ This method is called by: overridden versions in Hero and Monster
 			this.hitPoints -= hitPoints;
 			if (this.hitPoints < 0)
 				this.hitPoints = 0;
-			System.out.println(getName() + " hit " +
-								" for <" + hitPoints + "> points damage.");
-			System.out.println(getName() + " now has " +
-								getHitPoints() + " hit points remaining.");
-			System.out.println();
+			
+			UI.printHP(this.hitPoints, -hitPoints);
 		}//end else if
-
-		if (this.hitPoints == 0)
-			System.out.println(name + " has been killed :-(");
-
-
 	}//end method
 
 /*-------------------------------------------------------

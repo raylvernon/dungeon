@@ -37,4 +37,11 @@ public class UI
 		printOptions(elems);
 		return elems[Keyboard.readInt() % elems.length];
 	}
+
+	public static void printHP(int currentHP, int changeInHP)
+	{
+		System.out.println((currentHP > 0 ? currentHP + "hp " : "(dead) ")  + "[" + (changeInHP > 0 ? "+" : "-") + Math.abs(changeInHP) + "]");
+	}
+	
+	private static ArrayList<DungeonCharacter> observedCharacters = null;
 }
