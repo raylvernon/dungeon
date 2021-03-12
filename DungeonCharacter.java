@@ -12,6 +12,7 @@ public class DungeonCharacter implements Comparable
 		DungeonCharacter rv = new DungeonCharacter(name + "the Warrior", 250, 4, .8);
 		rv.addAction(new CuttingWeapon("Zweihander", 100)); // Barbarian bro goes WHACK
 		rv.addAction(new HealingItem("Nordic Ale", 75, 3));
+		rv.addAction(new CrushingWeapon("Hammer Down!", 110));
 		return rv;
 	}//end constructor
 
@@ -19,6 +20,8 @@ public class DungeonCharacter implements Comparable
 	{
 		DungeonCharacter rv = new DungeonCharacter(name + "the Thief", 150, 6, .8);
 		rv.addAction(new CuttingWeapon("Crooked Dagger", 50));
+		rv.addAction(new RangedWeapon("Dagger Throw", 35));
+		rv.addAction(new HealingItem("Flask of Jin", 40, 3));
 		return rv;
 	}//end constructor
 
@@ -26,14 +29,16 @@ public class DungeonCharacter implements Comparable
 	{
 		DungeonCharacter rv = new DungeonCharacter(name + "the Sorceress", 150, 5, .7);
 		rv.addAction(new RangedWeapon("Fireball", 100));
-		rv.addAction(new HealingSpell("heal", 50));
+		rv.addAction(new HealingSpell("Heal", 50));
+		rv.addAction(new RangedWeapon("Eldritch Blast", 155));
 		return rv;
 	}//end constructor
 
 	public static DungeonCharacter Archer (String name){
 		DungeonCharacter rv = new DungeonCharacter(name + "the Archer", 165, 5, .7);
-		rv.addAction(new RangedWeapon("Flying Arrow", 90));
+		rv.addAction(new RangedWeapon("Longbow Shot", 90));
 		rv.addAction(new RangedWeapon("Bomb Arrow", 110));
+		rv.addAction(new HealingItem("Nectar Potion", 55, 3));
 		return rv;
 	}
 
