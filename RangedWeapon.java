@@ -11,6 +11,6 @@ public class RangedWeapon extends Action
 	public void perform(DungeonCharacter me, DungeonCharacter target)
 	{
 		System.out.println(me.getName() + " Fires at " + target.getName() + " with their " + getName());
-		target.subtractHitPoints(baseDamage);
+		attack(me,target,baseDamage);
 	}
 }

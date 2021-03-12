@@ -5,6 +5,18 @@ public class Action
 		name = n;
 	}
 
+	private boolean willHit(DungeonCharacter attacker, DungeonCharacter defender)
+	{
+		return attacker.getChanceToHit() > Math.random();
+	}
+	
+	protected void attack(DungeonCharacter attacker, DungeonCharacter defender, int baseDamage)
+	{
+		if(willHit(attacker, defender))
+			defender.subtractHitPoints(baseDamage);
+		else
+			System.out.println("- MISSED! -");
+	}
 	
     public void perform(DungeonCharacter me, DungeonCharacter target)
 	{

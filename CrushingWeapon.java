@@ -10,6 +10,6 @@ public class CrushingWeapon extends Action
 	public void perform(DungeonCharacter me, DungeonCharacter target)
 	{
 		System.out.println(me.getName() + " swings their " + getName() + " down on " + target.getName() + "'s head!");
-		target.subtractHitPoints(baseDamage);
+		attack(me,target,baseDamage);
 	}
 }

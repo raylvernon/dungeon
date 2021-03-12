@@ -140,7 +140,12 @@ public class DungeonCharacter implements Comparable
 	{
 		return hitPoints;
 	}//end getHitPoints
-//-----------------------------------------------------------------
+	
+	public double getChanceToHit()
+	{
+		return chanceToHit;
+	}
+	
 	public int getAttackSpeed()
 	{
 		return attackSpeed;

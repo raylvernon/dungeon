@@ -10,6 +10,6 @@ public class BreathAttack extends Action
 	public void perform(DungeonCharacter me, DungeonCharacter target)
 	{
 		System.out.println(me.getName() + " breathes " + getName() + " at " + target.getName());
-		target.subtractHitPoints(baseDamage);
+		attack(me,target,baseDamage);
 	}
 }
