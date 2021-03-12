@@ -25,7 +25,7 @@ public class Dungeon
 			battle(theHero, theMonster);
 			monstersKilled++;
 			System.out.println("Monsters killed: " + monstersKilled);
-		} while (playAgain());
+		} while (playAgain(theHero));
 
     }//end main method
 
@@ -78,14 +78,22 @@ a polymorphic reference (Monster) to accomplish this task.
 playAgain allows gets choice from user to play another game.  It returns
 true if the user chooses to continue, false otherwise.
 ---------------------------------------------------------------------*/
-	public static boolean playAgain()
+	public static boolean playAgain(DungeonCharacter theHero)
 	{
 		char again;
+		
+		
+		if(theHero.isAlive()) {
+			System.out.println("Play again (y/n)?");
+			again = Keyboard.readChar();
 
-		System.out.println("Play again (y/n)?");
-		again = Keyboard.readChar();
-
-		return (again == 'Y' || again == 'y');
+			return (again == 'Y' || again == 'y');
+		}
+		
+		else {
+			System.out.print("Game Over!!!");
+			return false;
+		}
 	}//end playAgain method
 
 	
