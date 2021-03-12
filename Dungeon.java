@@ -28,18 +28,6 @@ public class Dungeon
 
     }//end main method
 
-	// often we need a numbered list of available options for the user to choose
-	public static <T> void printOptionList(T elems[])
-	{
-		for(int i = 0; i < elems.length; i++)
-			System.out.println(i + ". " + elems[i]);
-	}
-	
-	public static <T> void printOptionList(ArrayList<T> elems)
-	{
-		for(int i = 0; i < elems.size(); i++)
-			System.out.println(i + ". " + elems.get(i));		
-	}
 /*-------------------------------------------------------------------
 chooseHero allows the user to select a DungeonCharacter, creates that DungeonCharacter, and
 returns it.  It utilizes a polymorphic reference (Hero) to accomplish
@@ -54,10 +42,7 @@ this task
 		
 		System.out.println("Choose a DungeonCharacter:\n");
 		
-		printOptionList(Heroes);
-		
-		choice = Keyboard.readInt();
-		return Heroes[choice % Heroes.length];
+		return UI.promptOptions(Heroes);
 	}//end chooseHero method
 
 /*-------------------------------------------------------------------
@@ -99,10 +84,10 @@ public static void takeTurn(DungeonCharacter active, DungeonCharacter target, bo
 	// if the player is making the choice
 	if(playerChooses)
 	{
-		// show available options
-		printOptionList(active.getActions());
-		
-		active.act(Keyboard.readInt(), target);		
+		// choose action
+		Action theAction = UI.promptOptions(active.getActions());
+		// perform action
+		theAction.perform(active, target);
 	}
 	else // DungeonCharacter has to figure out what the best thing to do is
 	{
