@@ -21,7 +21,7 @@ public class DungeonCharacter implements Comparable
 		rv.addAction(new CuttingWeapon("Crooked Dagger", 50));
 		return rv;
 	}//end constructor
-	
+
 	public static DungeonCharacter Sorceress(String name)
 	{
 		DungeonCharacter rv = new DungeonCharacter(name + "the Sorceress", 150, 5, .7);
@@ -29,7 +29,14 @@ public class DungeonCharacter implements Comparable
 		rv.addAction(new HealingSpell("heal", 50));
 		return rv;
 	}//end constructor
-	
+
+	public static DungeonCharacter Archer (String name){
+		DungeonCharacter rv = new DungeonCharacter(name + "the Archer", 165, 5, .7);
+		rv.addAction(new RangedWeapon("Flying Arrow", 90));
+		rv.addAction(new RangedWeapon("Bomb Arrow", 110));
+		return rv;
+	}
+
     public static DungeonCharacter Ogre()
 	{
 		DungeonCharacter rv = new DungeonCharacter("Oscar the Ogre", 200, 2, .6);
@@ -37,14 +44,14 @@ public class DungeonCharacter implements Comparable
 		rv.addAction(new HealingItem("Stinky Mead", 100, 1));
 		return rv;
     }//end constructo
-	
+
 	public static DungeonCharacter Skeleton()
 	{
 		DungeonCharacter rv = new DungeonCharacter("Sargath the Skeleton", 100, 3, .8);
 		rv.addAction(new RangedWeapon("Femur-braced bow", 60));
 		return rv;
     }//end constructor
-	
+
 	public static DungeonCharacter Gremlin()
 	{
 		DungeonCharacter rv = new DungeonCharacter("Gnarltooth the Gremlin", 70, 5, .8);
@@ -68,12 +75,12 @@ public class DungeonCharacter implements Comparable
 
 	// important behavior is in actions!
 	ArrayList<Action> actions;
-	
+
 	public void addAction(Action a)
 	{
 		actions.add(a);
 	}
-	
+
 	public void removeAction(Action a)
 	{
 		// don't want to have an empty list of actions
@@ -81,12 +88,12 @@ public class DungeonCharacter implements Comparable
 		if(actions.size() > 1)
 			actions.remove(a);
 	}
-	
+
 	public ArrayList<Action> getActions()
 	{
 		return actions;
 	}
-	
+
 	public int compareTo(Object o)
 	{
 		return 1;
@@ -144,7 +151,7 @@ This method is called by: heal method of monsters and Sorceress
 		}
 	}//end addHitPoints method
 
-	
+
 /*-------------------------------------------------------
 subtractHitPoints is used to decrement the hitpoints a dungeon character has.
 It also reports the damage and remaining hit points (these things could be
@@ -192,11 +199,11 @@ This method is called by: unknown (intended for external use)
 	  return (hitPoints > 0);
 	}//end isAlive method
 
-// act(int action, DungeonCharacter target) 
+// act(int action, DungeonCharacter target)
 // 		action: what action to perform (index in actions[])
 //      target: what DungeonCharacter to attack or target (behavior depends on action)
 // dispatches on the actions[] array.
-// knowing what number corresponds to what action requires 
+// knowing what number corresponds to what action requires
 // querying the available actions with getActions()
 	public void act(int actionChoice, DungeonCharacter target)
 	{
