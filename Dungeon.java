@@ -9,7 +9,9 @@ public class Dungeon
 
 		DungeonCharacter theHero;
 		DungeonCharacter theMonster;
-		theHero = chooseHero();
+		
+		theHero = chooseHero(chooseName() + " ");
+		
 		int monstersKilled = 0;
 
 		do
@@ -27,19 +29,26 @@ public class Dungeon
 
     }//end main method
 
+	public static String chooseName()
+	{
+		System.out.println("What is your name, adventurer?");
+		return Keyboard.readString();
+	}
+	
+	
 /*-------------------------------------------------------------------
 chooseHero allows the user to select a DungeonCharacter, creates that DungeonCharacter, and
 returns it.  It utilizes a polymorphic reference (Hero) to accomplish
 this task
 ---------------------------------------------------------------------*/
-	public static DungeonCharacter chooseHero()
+	public static DungeonCharacter chooseHero(String name)
 	{
 		int choice;
 		DungeonCharacter theHero;
 
-		DungeonCharacter Heroes[] = {DungeonCharacter.Warrior(""), DungeonCharacter.Sorceress(""), DungeonCharacter.Thief("")};
+		DungeonCharacter Heroes[] = {DungeonCharacter.Warrior(name), DungeonCharacter.Sorceress(name), DungeonCharacter.Thief(name)};
 		
-		System.out.println("Choose a DungeonCharacter:\n");
+		System.out.println("What is your class?");
 		
 		return UI.promptOptions(Heroes);
 	}//end chooseHero method

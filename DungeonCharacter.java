@@ -127,7 +127,7 @@ public class DungeonCharacter implements Comparable
 	{
 		return name;
 	}//end getName
-
+	
 //-----------------------------------------------------------------
 	public int getHitPoints()
 	{
