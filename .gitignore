@@ -11,3 +11,11 @@
 /Warrior.class
 /Paladin.class
 /Dragon.class
+/Action.class
+/BreathAttack.class
+/CrushingWeapon.class
+/CuttingWeapon.class
+/HealingItem.class
+/HealingSpell.class
+/RangedWeapon.class
+/SwordStrike.class
