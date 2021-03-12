@@ -14,13 +14,12 @@ public class Dungeon
 
 		do
 		{
-			//once you kill 3 DungeonCharacters you fight the dragon boss
-			if(monstersKilled < 3)
-				theMonster = generateMonster();
-			else {
+			if(monstersKilled > 0 && monstersKilled % 3 == 0){
 				System.out.println("you sense great danger ahead...");
-				theMonster = DungeonCharacter.Dragon();
-			}
+				theMonster = generateBoss();
+			}else
+				theMonster = generateMonster();
+			
 			battle(theHero, theMonster);
 			monstersKilled++;
 			System.out.println("Monsters killed: " + monstersKilled);
@@ -58,6 +57,11 @@ a polymorphic reference (Monster) to accomplish this task.
 		return Monsters[rnd % Monsters.length];
 	}//end generateMonster method
 
+	public static DungeonCharacter generateBoss()
+	{
+		return DungeonCharacter.Dragon();
+	}
+	
 /*-------------------------------------------------------------------
 playAgain allows gets choice from user to play another game.  It returns
 true if the user chooses to continue, false otherwise.
@@ -119,16 +123,17 @@ user has the option of quitting.
 		{
 			heroTimer -= theHero.getAttackSpeed();
 			monsterTimer -= theMonster.getAttackSpeed();
-			
-			if(heroTimer <= 0)
+
+			// Hero takes a turn
+			if(heroTimer <= 0 && theHero.isAlive())
 			{
-				// DungeonCharacter takes turn
 				takeTurn((DungeonCharacter)theHero, (DungeonCharacter)theMonster, true);
 				heroTimer = 100;
 			}
-			if(monsterTimer <= 0)
+			
+			// Monster takes a turn
+			if(monsterTimer <= 0 && theMonster.isAlive())
 			{
-				// DungeonCharacter takes turn
 				takeTurn((DungeonCharacter)theMonster, (DungeonCharacter)theHero, false);
 				monsterTimer = 100;
 			}
