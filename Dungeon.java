@@ -59,6 +59,9 @@ a polymorphic reference (Monster) to accomplish this task.
 ---------------------------------------------------------------------*/
 	public static DungeonCharacter generateMonster()
 	{
+		if(Math.random() > 0.95)
+			return DungeonCharacter.Mimic();
+		
 		DungeonCharacter Monsters[] = {DungeonCharacter.Ogre(), DungeonCharacter.Gremlin(), DungeonCharacter.Skeleton()};
 
 		int rnd = (int)(Math.random() * 100);

@@ -72,6 +72,13 @@ public class DungeonCharacter implements Comparable
 		rv.addAction(new CrushingWeapon("Thorny Tail", 80));
 		return rv;
 	}
+	
+	public static DungeonCharacter Mimic()
+	{
+		DungeonCharacter rv = new DungeonCharacter("a Loathsome, animate ooze", 100, 10, .5);
+		rv.addAction(new Mimicry());
+		return rv;
+	}
 
 	protected String name;
 	protected int hitPoints;
@@ -139,7 +146,10 @@ public class DungeonCharacter implements Comparable
 		return attackSpeed;
 	}//end getAttackSpeed
 
-
+	public void setAttackSpeed(int sp)
+	{
+		attackSpeed = sp;
+	}
 /*-------------------------------------------------------
 addHitPoints is used to increment the hitpoints a dungeon character has
 
