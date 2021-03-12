@@ -12,7 +12,7 @@ public class DungeonCharacter implements Comparable
 		DungeonCharacter rv = new DungeonCharacter(name + "the Warrior", 250, 4, .8);
 		rv.addAction(new CuttingWeapon("Zweihander", 100)); // Barbarian bro goes WHACK
 		rv.addAction(new HealingItem("Nordic Ale", 75, 3));
-		rv.addAction(new CrushingWeapon("Hammer Down!", 110));
+		rv.addAction(new CrushingWeapon("Moonlit Smasher", 110));
 		return rv;
 	}//end constructor
 
