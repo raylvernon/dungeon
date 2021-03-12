@@ -104,6 +104,11 @@ public class DungeonCharacter implements Comparable
 		return 1;
 	}
 
+	public @Override String toString()
+	{
+		return name;
+	}
+	
 //-----------------------------------------------------------------
 //explicit constructor to initialize instance variables -- it is called
 // by derived classes

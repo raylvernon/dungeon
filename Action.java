@@ -17,4 +17,9 @@ public class Action
 	{
 		return name;
 	}
+	
+	public @Override String toString()
+	{
+		return name;
+	}
 }
