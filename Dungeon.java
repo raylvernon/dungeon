@@ -9,9 +9,9 @@ public class Dungeon
 
 		DungeonCharacter theHero;
 		DungeonCharacter theMonster;
-		
+
 		theHero = chooseHero(chooseName() + " ");
-		
+
 		int monstersKilled = 0;
 
 		do
@@ -21,7 +21,7 @@ public class Dungeon
 				theMonster = generateBoss();
 			}else
 				theMonster = generateMonster();
-			
+
 			battle(theHero, theMonster);
 			monstersKilled++;
 			System.out.println("Monsters killed: " + monstersKilled);
@@ -34,8 +34,8 @@ public class Dungeon
 		System.out.println("What is your name, adventurer?");
 		return Keyboard.readString();
 	}
-	
-	
+
+
 /*-------------------------------------------------------------------
 chooseHero allows the user to select a DungeonCharacter, creates that DungeonCharacter, and
 returns it.  It utilizes a polymorphic reference (Hero) to accomplish
@@ -46,10 +46,10 @@ this task
 		int choice;
 		DungeonCharacter theHero;
 
-		DungeonCharacter Heroes[] = {DungeonCharacter.Warrior(name), DungeonCharacter.Sorceress(name), DungeonCharacter.Thief(name)};
-		
+		DungeonCharacter Heroes[] = {DungeonCharacter.Warrior(name), DungeonCharacter.Sorceress(name), DungeonCharacter.Thief(name), DungeonCharacter.Archer(name)};
+
 		System.out.println("What is your class?");
-		
+
 		return UI.promptOptions(Heroes);
 	}//end chooseHero method
 
@@ -61,11 +61,11 @@ a polymorphic reference (Monster) to accomplish this task.
 	{
 		if(Math.random() > 0.95)
 			return DungeonCharacter.Mimic();
-		
+
 		DungeonCharacter Monsters[] = {DungeonCharacter.Ogre(), DungeonCharacter.Gremlin(), DungeonCharacter.Skeleton()};
 
 		int rnd = (int)(Math.random() * 100);
-		
+
 		return Monsters[rnd % Monsters.length];
 	}//end generateMonster method
 
@@ -73,7 +73,7 @@ a polymorphic reference (Monster) to accomplish this task.
 	{
 		return DungeonCharacter.Dragon();
 	}
-	
+
 /*-------------------------------------------------------------------
 playAgain allows gets choice from user to play another game.  It returns
 true if the user chooses to continue, false otherwise.
@@ -81,30 +81,30 @@ true if the user chooses to continue, false otherwise.
 	public static boolean playAgain(DungeonCharacter theHero)
 	{
 		char again;
-		
-		
+
+
 		if(theHero.isAlive()) {
 			System.out.println("Play again (y/n)?");
 			again = Keyboard.readChar();
 
 			return (again == 'Y' || again == 'y');
 		}
-		
+
 		else {
 			System.out.print("Game Over!!!");
 			return false;
 		}
 	}//end playAgain method
 
-	
-	
+
+
 /*-----------------------------------------------
-turns for DungeonCharacteres and DungeonCharacters 
+turns for DungeonCharacteres and DungeonCharacters
 -------------------------------------------------*/
 public static void takeTurn(DungeonCharacter active, DungeonCharacter target, boolean playerChooses)
 {
 	System.out.println(active.getName() + " is ready: ");
-	
+
 	// if the player is making the choice
 	if(playerChooses)
 	{
@@ -121,7 +121,7 @@ public static void takeTurn(DungeonCharacter active, DungeonCharacter target, bo
 		active.act((int)(Math.random()*100) % active.getActions().size(), target);
 	}
 }
-	
+
 /*-------------------------------------------------------------------
 battle is the actual combat portion of the game.  It requires a DungeonCharacter
 and a DungeonCharacter to be passed in.  Battle occurs in rounds.  The DungeonCharacter
@@ -137,7 +137,7 @@ user has the option of quitting.
 
 		int heroTimer    = 100;
 		int monsterTimer = 100;
-		
+
 		//do battle
 		while (theHero.isAlive() && theMonster.isAlive() && pause != 'q')
 		{
@@ -150,7 +150,7 @@ user has the option of quitting.
 				takeTurn((DungeonCharacter)theHero, (DungeonCharacter)theMonster, true);
 				heroTimer = 100;
 			}
-			
+
 			// Monster takes a turn
 			if(monsterTimer <= 0 && theMonster.isAlive())
 			{
@@ -159,7 +159,7 @@ user has the option of quitting.
 			}
 		}//end battle loop
 
-		
+
 		if (!theMonster.isAlive())
 		    System.out.println(theHero.getName() + " was victorious!");
 		else if (!theHero.isAlive())
